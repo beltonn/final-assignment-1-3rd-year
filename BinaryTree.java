@@ -7,7 +7,7 @@ public class BinaryTree {
 	 
     public BinaryTree(Node r)
     {
-        
+        root = r;
     }
     
     

@@ -9,7 +9,9 @@ public class Node {
     
     public Node(int n)
     {
-      
+	   data = n;
+	   right = null;
+	   left = null;
     }
     
  
