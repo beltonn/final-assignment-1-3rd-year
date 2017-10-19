@@ -17,9 +17,22 @@ public class BinaryTree {
     }
 
  
-	public Node lowestCommonAncestor(Node root, Node p, Node q) 
+	public Node lowestCommonAncestor(Node root, Node a, Node b) 
 	{
-		
+		if(root==null)
+		{
+            return null;
+		}
+     
+       
+     
+        Node y = lowestCommonAncestor(root.left, a, b);
+        Node x = lowestCommonAncestor(root.right, a, b);
+     
+        if(y != null && x != null)
+        {
+            return root;
+        }
 	}     
 
 
