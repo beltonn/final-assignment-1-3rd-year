@@ -31,5 +31,10 @@ public class BinaryTreeTest {
         assertEquals("The lowest common ancestor:", node2, lca);
         
     }
+	@Test
+    public void isEmpty() 
+	{
+		
+	}
 
 }
