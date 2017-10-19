@@ -1,9 +1,8 @@
 
 public class Node {
 	
-	private Node left;
-	private Node right;
-    private int data;
+	Node left, right;
+    int data;
 
     
     
