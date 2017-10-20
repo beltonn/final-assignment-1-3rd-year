@@ -46,8 +46,8 @@ public class BinaryTreeTest {
 		BinaryTree bt = new BinaryTree(root);
 		Node node2 = new Node(2);
 		Node node3 = new Node(3);
-		root.left = node2;
-		root.right = node3;
+		root.setLeft(node2); 
+		root.setRight(node3);
 		Node lca = bt.lowestCommonAncestor(root, root, node2);
         assertEquals("Checking the lowest common ancestor of the root and a node:", 
         		root, lca);
@@ -62,7 +62,7 @@ public class BinaryTreeTest {
 		Node root = new Node(1);
 		BinaryTree bt = new BinaryTree(root);
 		Node node2 = new Node(2);
-		root.left = node2;
+		root.setLeft(node2);
 		Node lca = bt.lowestCommonAncestor(root, root.right, node2);
         assertEquals("The lowest common ancestor:", node2, lca);
     }
@@ -72,7 +72,7 @@ public class BinaryTreeTest {
 		Node root = new Node(1);
 		BinaryTree bt = new BinaryTree(root);
 		Node node2 = new Node(2);
-		root.right = node2;
+		root.setRight(node2);
 		Node lca = bt.lowestCommonAncestor(root, node2, root.left);
         assertEquals("The lowest common ancestor:", node2, lca);
     }
@@ -84,7 +84,16 @@ public class BinaryTreeTest {
 		Node lca = bt.lowestCommonAncestor(root, root.right, root.left);
         assertEquals("The lowest common ancestor:", null, lca);
     }
-	
+	@Test
+    public void lcaOfEmptyTree() //finding the lowest common ancestor of an empty tree
+    {
+		BinaryTree bt = new BinaryTree();
+		Node empty = bt.root;
+		Node node1 = null;
+		Node node2 = null;
+		Node lca = bt.lowestCommonAncestor(empty, node1, node2);
+        assertNull("Checking the lowest common ancestor of empty tree:", lca);
+    }
 	@Test
     public void emptyRoot() 
     {
@@ -107,6 +116,6 @@ public class BinaryTreeTest {
         treeEmpty = false;
         assertEquals("Checking if the tree is empty", treeEmpty, bt.isEmpty());
 
-	}
+	} 
 
 }
