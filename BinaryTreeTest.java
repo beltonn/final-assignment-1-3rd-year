@@ -42,27 +42,53 @@ public class BinaryTreeTest {
 	@Test
     public void lcaRoot() //finding the lowest common ancestor of the root and another node
     {
-		
+		Node root = new Node(1);
+		BinaryTree bt = new BinaryTree(root);
+		Node node2 = new Node(2);
+		Node node3 = new Node(3);
+		root.left = node2;
+		root.right = node3;
+		Node lca = bt.lowestCommonAncestor(root, root, node2);
+        assertEquals("The lowest common ancestor:", root, lca);
+        
+        lca = bt.lowestCommonAncestor(root, node3, root);
+        assertEquals("The lowest common ancestor:", root, lca);
     }
 	@Test
     public void lcaRightNodeNull() //finding the lowest common ancestor of a non-existent node and another node
     {
-		
+		Node root = new Node(1);
+		BinaryTree bt = new BinaryTree(root);
+		Node node2 = new Node(2);
+		root.left = node2;
+		Node lca = bt.lowestCommonAncestor(root, root.left, node2);
+        assertEquals("The lowest common ancestor:", node2, lca);
     }
 	@Test
     public void lcaLeftNodeNull() //finding the lowest common ancestor of a non-existent node and another node
     {
-		
+		Node root = new Node(1);
+		BinaryTree bt = new BinaryTree(root);
+		Node node2 = new Node(2);
+		root.right = node2;
+		Node lca = bt.lowestCommonAncestor(root, node2, root.left);
+        assertEquals("The lowest common ancestor:", node2, lca);
     }
 	@Test
     public void lcaOneNodeTree() //finding the lowest common ancestor of a one node tree
     {
-		
+		Node root = new Node(1);
+		BinaryTree bt = new BinaryTree(root);
+		Node lca = bt.lowestCommonAncestor(root, root.right, root.left);
+        assertEquals("The lowest common ancestor:", null, lca);
     }
 	@Test
     public void lcaOfEmptyTree() //finding the lowest common ancestor of an empty tree
     {
-		
+		BinaryTree bt = new BinaryTree();
+		Node empty = bt.root;
+		Node lca = bt.lowestCommonAncestor(bt.root, bt.root.left, bt.root.right);
+        assertEquals("The lowest common ancestor:", null, lca);
     }
 	@Test
     public void isEmpty() 
