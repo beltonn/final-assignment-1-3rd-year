@@ -34,7 +34,10 @@ public class BinaryTreeTest {
 	@Test
     public void isEmpty() 
 	{
-		
+		BinaryTree bt = new BinaryTree();
+		boolean treeEmpty = true;
+        assertEquals("The tree is empty", treeEmpty, bt.isEmpty());
+
 	}
 
 }
