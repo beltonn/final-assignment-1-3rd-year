@@ -12,7 +12,7 @@ public class Node {
 	   right = null;
 	   left = null;
     }
-    
+   
  
     public void setLeft(Node n)
     {
