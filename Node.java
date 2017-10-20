@@ -26,19 +26,13 @@ public class Node {
   
     public Node getLeft()
     {
-    	if(left.equals(null))
-    	{
-    		return null;
-    	}
+    	
       return left;
     }
 
     public Node getRight()
     {
-    	if(right.equals(null))
-    	{
-    		return null;
-    	}
+    	
        return right;
     }
     

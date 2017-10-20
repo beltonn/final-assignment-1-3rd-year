@@ -10,8 +10,8 @@ public class BinaryTree {
     }
     public BinaryTree()
     {
-        root = null;
-       
+    	
+    	root = null;
         
     }
     
@@ -19,7 +19,7 @@ public class BinaryTree {
     public boolean isEmpty()
     {
     	return root == null;
-    }
+    } 
 
  
 	public Node lowestCommonAncestor(Node root, Node a, Node b) 
