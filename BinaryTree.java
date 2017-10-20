@@ -8,7 +8,10 @@ public class BinaryTree {
     {
         root = r;
     }
-    
+    public BinaryTree()
+    {
+        root = null;
+    }
     
    
     public boolean isEmpty()
@@ -24,7 +27,10 @@ public class BinaryTree {
             return null;
 		}
      
-       
+		if(root == a || root == b)
+		{
+            return root;
+		}
      
         Node y = lowestCommonAncestor(root.left, a, b);
         Node x = lowestCommonAncestor(root.right, a, b);
@@ -32,6 +38,14 @@ public class BinaryTree {
         if(y != null && x != null)
         {
             return root;
+        }
+        else if(y == null && x == null)
+        {
+            return null;
+        }
+        else
+        {
+            return y == null?x:y;
         }
 	}     
 
