@@ -2,7 +2,7 @@
 public class BinaryTree {
 	
 
-	private Node root;
+	public Node root;
 	 
     public BinaryTree(Node r)
     {
@@ -22,7 +22,7 @@ public class BinaryTree {
  
 	public Node lowestCommonAncestor(Node root, Node a, Node b) 
 	{
-		if(root==null)
+		if(root == null)
 		{
             return null;
 		}
