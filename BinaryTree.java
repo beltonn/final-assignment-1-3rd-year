@@ -15,7 +15,6 @@ public class BinaryTree {
         
     }
     
-   
     public boolean isEmpty()
     {
     	return root == null;

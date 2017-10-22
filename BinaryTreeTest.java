@@ -102,7 +102,7 @@ public class BinaryTreeTest {
 		Node node1 = new Node(1);
 		Node node2 = new Node(2);
 		Node lca = bt.lowestCommonAncestor(root, node1, node2);
-        assertNull("Checking the lowest common ancestor of empty tree:", lca);
+        assertNull("Checking the lowest common ancestor of 2 nodes with no root:", lca);
     }
 	@Test
     public void isEmpty() 
