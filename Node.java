@@ -36,13 +36,13 @@ public class Node<T>
     	}
     }
     
-    public void remove(ArrayList<Node<T>> a)
+    public void remove(ArrayList<Node<T>> list)
     {
-    	if(a != null)
+    	if(list != null)
     	{
-		    for(int i = 0; i < a.size(); i++)
+		    for(int i = 0; i < list.size(); i++)
 		    {
-		        Node<T> current = a.get(i);
+		        Node<T> current = list.get(i);
 		        if(current.edgesTo.contains(this))
 		        {
 		            current.edgesTo.remove(current.edgesTo.indexOf(this));
