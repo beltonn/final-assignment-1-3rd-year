@@ -1,49 +1,37 @@
+import java.util.ArrayList;
 
-public class Node {
-	
-	Node left, right;
-    int data;
-
+public class Node<T>
+{
+     
+    public T data;
+    public ArrayList<Node<T>> edgesTo;
+    public int indegree;
+    public int outdegree;
     
-    
-    public Node(int n)
+    public Node(T value)
     {
-	   data = n;
-	   right = null;
-	   left = null;
+        data = value; 
+        edgesTo = new ArrayList<Node<T>>();
+        indegree = 0;
+        outdegree = edgesTo.size();
+    } 
+
+    public void connect(Node<T> child)
+    {
+        
     }
+
    
- 
-    public void setLeft(Node n)
-    {
-      left = n;
-    }
- 
-    public void setRight(Node n)
-    {
-    	right = n;
-    }
-  
-    public Node getLeft()
+    
+    public void disconnect(Node<T> child)
     {
     	
-      return left;
-    }
-
-    public Node getRight()
-    {
-    	
-       return right;
     }
     
-    public void setData(int d)
+    public void remove(ArrayList<Node<T>> a)
     {
-    	data = d;
+        
     }
-   
-    public int getData()
-    {
-    	return data;
-    }     
+
 
 }
