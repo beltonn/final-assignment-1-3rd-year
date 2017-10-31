@@ -36,21 +36,47 @@ public class Node<T>
     	}
     }
     
-    public void remove(ArrayList<Node<T>> list)
-    {
-    	if(list != null)
+    
+
+	/*public void delete(ArrayList<Node<T>> DAG) {
+		
+		if(DAG.contains(this))
     	{
-		    for(int i = 0; i < list.size(); i++)
-		    {
-		        Node<T> current = list.get(i);
-		        if(current.edgesTo.contains(this))
-		        {
-		            current.edgesTo.remove(current.edgesTo.indexOf(this));
-		        }
-		    }
-		    this.edgesTo = null;
+    		if(this == DAG.get(0))
+    		{
+    			for(int i =0; i < this.edgesTo.size(); i++)
+    			{
+    				edgesTo.get(i).indegree--;
+    				DAG.remove(this);
+    			}
+    			this.data = null;
+    			this.edgesTo = null;
+    			this.indegree = 0;
+    			this.outdegree = 0;
+    		}
+    		else
+    		{
+			    for(int i = 0; i < DAG.size(); i++)
+			    {
+			        Node<T> current = DAG.get(i);
+			        if(current.edgesTo.contains(this))
+			        {
+			        	System.out.println(DAG.get(current.edgesTo.indexOf(this)).data.toString());
+		                current.edgesTo.remove(this);
+		                DAG.remove(this);
+				    	System.out.println("here, i = " + i);
+			        }
+			    }
+			    this.edgesTo = null;
+    		}
+    		
+		    
     	}
-    }
+		// TODO Auto-generated method stub
+		
+	} */
+	
+	
 
 
 }

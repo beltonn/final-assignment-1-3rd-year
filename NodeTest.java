@@ -65,31 +65,6 @@ public class NodeTest {
 	    assertTrue("Testing connecting nodes", a.edgesTo.size() == 2);
 
 	}
-	
-	@Test
-	public void checkRemove() 
-	{
-		ArrayList<Node<Integer>> list = new ArrayList<Node<Integer>>();
-		Node<Integer> a = new Node<Integer>(1);
-		Node<Integer> b = new Node<Integer>(2);
-		Node<Integer> c = new Node<Integer>(3);
-		Node<Integer> d = new Node<Integer>(4);
-		list.add(a);
-		list.add(b);
-		list.add(c);
-		a.remove(list);
 
-
-	    assertTrue("Testing connecting nodes", list.size() == 2);
-
-	}
-	
-	@Test
-	public void checkRemoveNull() 
-	{
-		ArrayList<Node<Integer>> list = new ArrayList<Node<Integer>>();
-	    assertTrue("Testing connecting nodes", list.size() == 0);
-
-	}
 
 }

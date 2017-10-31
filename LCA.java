@@ -41,13 +41,24 @@ public class LCA {
 	        {
 	        	return ancestorsAB;
 	        }
-	        
+	        boolean valid = true;
 	        while (ancestorsAB.size() > 1) 
 	        {
 				for (int i = 0; i < ancestorsAB.size(); i++) 
 				{
-					
-					if (common(ancestorsAB, ancestorsAB.get(i).edgesTo).size() > 0) 
+					for (int j = 0; j < ancestorsAB.size(); j ++) 
+					{
+						Node current = ancestorsAB.get(j);
+						if (common(ancestorsAB, current.edgesTo).size() > 0)
+						{
+							valid = false;
+						}
+					}
+					if(valid)
+	            	{
+	            		return ancestorsAB;
+	            	}
+            		else if(common(ancestorsAB, ancestorsAB.get(i).edgesTo).size() > 0)
 					{
 						ancestorsAB.remove(i);
 					}
@@ -59,7 +70,7 @@ public class LCA {
     	return null;
         
     }
-	
+
 	public static boolean validate(ArrayList<Node> DAG, Node a, Node b)
     {
 		if(DAG == null || a == null || b ==null || !DAG.contains(a) || !DAG.contains(b))
