@@ -18,19 +18,38 @@ public class Node<T>
 
     public void connect(Node<T> child)
     {
-        
+    	if(child != null)
+        {
+    		child.indegree++;
+            this.edgesTo.add(child);
+        }
     }
 
    
     
     public void disconnect(Node<T> child)
     {
-    	
+    	if(this.edgesTo.contains(child))
+    	{
+    		this.edgesTo.remove(child);
+    		indegree--;
+    	}
     }
     
     public void remove(ArrayList<Node<T>> a)
     {
-        
+    	if(a != null)
+    	{
+		    for(int i = 0; i < a.size(); i++)
+		    {
+		        Node<T> current = a.get(i);
+		        if(current.edgesTo.contains(this))
+		        {
+		            current.edgesTo.remove(current.edgesTo.indexOf(this));
+		        }
+		    }
+		    this.edgesTo = null;
+    	}
     }
 
 
