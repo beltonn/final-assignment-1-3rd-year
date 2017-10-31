@@ -22,6 +22,7 @@ public class LCA {
 	        
 	        ancestorsOfA.add(a);
 	        ancestorsOfB.add(b);
+	        
 	        if(validateRootList(roots))
         	{
 		        for(int i = 0; i < roots.size(); i++)
@@ -61,7 +62,7 @@ public class LCA {
 	
 	public static boolean validate(ArrayList<Node> DAG, Node a, Node b)
     {
-		if(DAG.size() == 0 || a == null || b ==null || !DAG.contains(a) || !DAG.contains(b))
+		if(DAG == null || a == null || b ==null || !DAG.contains(a) || !DAG.contains(b))
 		{
 			return false;
 		}
@@ -83,12 +84,35 @@ public class LCA {
 	
 	public static void findAncestors(Node root, ArrayList<Node> ancestorsOfA, ArrayList<Node> ancestorsOfB)
     {
-		
+		for(int i = 0; i < root.edgesTo.size(); i++)
+    	{
+    		Node current = (Node) root.edgesTo.get(i);
+    		if(!(ancestorsOfA.contains(current) || ancestorsOfB.contains(current)))
+    		{
+    			findAncestors(current, ancestorsOfA, ancestorsOfB);
+    		}
+    		if(ancestorsOfA.contains(current))
+    		{
+    			ancestorsOfA.add(root);
+    		}
+    		if(ancestorsOfB.contains(current))
+    		{
+    			ancestorsOfB.add(root);	
+    		}
+    	}
     }
 	
 	public static ArrayList<Node> common(ArrayList<Node> ancestorsOfA, ArrayList<Node> ancestorsOfB) 
 	{
-
+		ArrayList<Node> common = new ArrayList<Node>();
+		for(int i =0; i < ancestorsOfA.size(); i++)
+		{
+			if(ancestorsOfB.contains(ancestorsOfA.get(i)))
+			{
+				common.add(ancestorsOfA.get(i));
+			}
+		}
+		return common;
 	}
 	
 	public static boolean isCyclicUtil(ArrayList<Node> DAG)
