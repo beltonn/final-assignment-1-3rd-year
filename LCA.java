@@ -4,17 +4,82 @@ public class LCA {
 	
 	public static ArrayList<Node> LowestCommonAncestor(ArrayList<Node> DAG, Node a, Node b)
     {
-		
+		if(validate(DAG, a, b))
+    	{
+	    	ArrayList<Node> roots = new ArrayList<Node>();
+	    	ArrayList<Node> ancestorsOfA = new ArrayList<Node>();
+	    	ArrayList<Node> ancestorsOfB = new ArrayList<Node>();
+	    	ArrayList<Node> ancestorsAB = new ArrayList<Node>();
+	    	
+	        for(int i = 0; i < DAG.size(); i++)
+	        {
+	        	if(DAG.get(i).indegree == 0)
+	        	{
+	        		roots.add(DAG.get(i));
+	        	}
+	        }
+	        
+	        
+	        ancestorsOfA.add(a);
+	        ancestorsOfB.add(b);
+	        if(validateRootList(roots))
+        	{
+		        for(int i = 0; i < roots.size(); i++)
+		        {
+		        	findAncestors(roots.get(i), ancestorsOfA, ancestorsOfB);
+		        }
+        	}
+	        
+	        ancestorsAB = common(ancestorsOfA, ancestorsOfB);
+	        
+	        if(ancestorsAB.size() == 0)
+	        {
+	        	return null;
+	        }
+	        else if(ancestorsAB.size() == 1)
+	        {
+	        	return ancestorsAB;
+	        }
+	        
+	        while (ancestorsAB.size() > 1) 
+	        {
+				for (int i = 0; i < ancestorsAB.size(); i++) 
+				{
+					
+					if (common(ancestorsAB, ancestorsAB.get(i).edgesTo).size() > 0) 
+					{
+						ancestorsAB.remove(i);
+					}
+					
+				}
+			}
+	        return ancestorsAB;
+    	}
+    	return null;
+        
     }
 	
 	public static boolean validate(ArrayList<Node> DAG, Node a, Node b)
     {
-		
+		if(DAG.size() == 0 || a == null || b ==null || !DAG.contains(a) || !DAG.contains(b))
+		{
+			return false;
+		}
+		return true;
     }
-	public static boolean check(ArrayList<Node> ancestorsAB)
+	public static boolean validateRootList(ArrayList<Node> roots)
     {
-		
+		for(int i = 0; i < roots.size(); i++)
+		{
+			if(roots.get(i).edgesTo == null || roots.get(i).edgesTo.size() == 0)
+			{
+				return false;
+			}
+		}
+		return true;
+	
     }
+	
 	
 	public static void findAncestors(Node root, ArrayList<Node> ancestorsOfA, ArrayList<Node> ancestorsOfB)
     {
