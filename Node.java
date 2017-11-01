@@ -21,6 +21,7 @@ public class Node<T>
     	if(child != null)
         {
     		child.indegree++;
+    		this.outdegree++;
             this.edgesTo.add(child);
         }
     }
@@ -32,7 +33,8 @@ public class Node<T>
     	if(this.edgesTo.contains(child))
     	{
     		this.edgesTo.remove(child);
-    		indegree--;
+    		outdegree--;
+    		child.indegree--;
     	}
     }
     

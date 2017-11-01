@@ -24,8 +24,8 @@ public class LCATest {
 		Node b = new Node(2);
 		ArrayList<Node> DAG = new ArrayList<Node>();
 		DAG.add(b);
-	    assertEquals("Testing empty DAG", null, LCA.LowestCommonAncestor(DAG, a, b));
-	    assertEquals("Testing empty DAG", null, LCA.LowestCommonAncestor(DAG, b, a));
+	    assertEquals("Testing a not an element of DAG", null, LCA.LowestCommonAncestor(DAG, a, b));
+	    assertEquals("Testing a not an element of DAG", null, LCA.LowestCommonAncestor(DAG, b, a));
 
 	}
 	@Test
@@ -44,7 +44,7 @@ public class LCATest {
 		b.connect(c);
 		c.connect(d);
 		d.connect(a);
-	    assertEquals("Testing for a cycle", true, LCA.isCyclicUtil(DAG));
+	    assertEquals("Testing for a cycle", true, LCA.isCyclic(DAG));
 
 		
 	}
@@ -70,7 +70,7 @@ public class LCATest {
 		e.connect(b);
 		e.connect(a);
 		f.connect(a);
-	    assertEquals("Testing for a cycle", false, LCA.isCyclicUtil(DAG));
+	    assertEquals("Testing for a cycle", false, LCA.isCyclic(DAG));
 	}
 	@Test
 	public void checkRootsNoEdges() 
@@ -97,7 +97,7 @@ public class LCATest {
 	    assertEquals("Testing a node in the DAG, not connected", null, LCA.LowestCommonAncestor(DAG, c, d));
 
 
-	}
+	} 
 
 	@Test
 	public void checkLCA() 
@@ -120,8 +120,8 @@ public class LCATest {
 		d.connect(b);
 		e.connect(b);
 		e.connect(a);
-		f.connect(a);
-	   // assertEquals("Testing LCA", c, LCA.LowestCommonAncestor(DAG, c, d));
+		f.connect(a);  
+		
 	    assertEquals("Testing LCA", e, LCA.LowestCommonAncestor(DAG, a, b));
 	    assertEquals("Testing LCA", f, LCA.LowestCommonAncestor(DAG, d, f));
 	    assertEquals("Testing No common ancestors", null, LCA.LowestCommonAncestor(DAG, e, c));

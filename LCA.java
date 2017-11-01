@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class LCA {
 	
-	public static ArrayList<Node> LowestCommonAncestor(ArrayList<Node> DAG, Node a, Node b)
+	public static Node LowestCommonAncestor(ArrayList<Node> DAG, Node a, Node b)
     {
 		if(validate(DAG, a, b))
     	{
@@ -23,26 +23,33 @@ public class LCA {
 	        ancestorsOfA.add(a);
 	        ancestorsOfB.add(b);
 	        
-	        if(validateRootList(roots))
-        	{
-		        for(int i = 0; i < roots.size(); i++)
-		        {
+	       
+		   for(int i = 0; i < roots.size(); i++)
+		   {
+		      	if(validateRoot(roots.get(i)))
+		       	{
 		        	findAncestors(roots.get(i), ancestorsOfA, ancestorsOfB);
-		        }
-        	}
+		        	
+		       	}
+		      	else
+		      	{
+		      		return null;
+		      	}
+		   }
+        	
 	        
 	        ancestorsAB = common(ancestorsOfA, ancestorsOfB);
 	        
+	        
+        	
+
 	        if(ancestorsAB.size() == 0)
 	        {
 	        	return null;
 	        }
-	        else if(ancestorsAB.size() == 1)
-	        {
-	        	return ancestorsAB;
-	        }
+	
 	        boolean valid = true;
-	        while (ancestorsAB.size() > 1) 
+	        while (ancestorsAB.size() != 0) 
 	        {
 				for (int i = 0; i < ancestorsAB.size(); i++) 
 				{
@@ -56,7 +63,7 @@ public class LCA {
 					}
 					if(valid)
 	            	{
-	            		return ancestorsAB;
+	            		return ancestorsAB.get(0);
 	            	}
             		else if(common(ancestorsAB, ancestorsAB.get(i).edgesTo).size() > 0)
 					{
@@ -64,8 +71,8 @@ public class LCA {
 					}
 					
 				}
-			}
-	        return ancestorsAB;
+			} 
+	        return ancestorsAB.get(0);
     	}
     	return null;
         
@@ -79,15 +86,15 @@ public class LCA {
 		}
 		return true;
     }
-	public static boolean validateRootList(ArrayList<Node> roots)
+	public static boolean validateRoot(Node root)
     {
-		for(int i = 0; i < roots.size(); i++)
+	
+		if(root.edgesTo == null || root.edgesTo.size() == 0)
 		{
-			if(roots.get(i).edgesTo == null || roots.get(i).edgesTo.size() == 0)
-			{
-				return false;
-			}
+			System.out.print("here");
+			return false;
 		}
+		
 		return true;
 	
     }
@@ -95,8 +102,11 @@ public class LCA {
 	
 	public static void findAncestors(Node root, ArrayList<Node> ancestorsOfA, ArrayList<Node> ancestorsOfB)
     {
+		Node<Integer> b = new Node<Integer>(1);
+
 		for(int i = 0; i < root.edgesTo.size(); i++)
     	{
+			
     		Node current = (Node) root.edgesTo.get(i);
     		if(!(ancestorsOfA.contains(current) || ancestorsOfB.contains(current)))
     		{
@@ -126,14 +136,47 @@ public class LCA {
 		return common;
 	}
 	
-	public static boolean isCyclicUtil(ArrayList<Node> DAG)
-    {
-		
-    }
+
 	
-	private static boolean isCyclic(ArrayList<Node> list, Node tmp, ArrayList<Node> visited, ArrayList<Node> stack, boolean hasCycle)
-	{
+	public static Boolean isCyclicUtil(ArrayList<Node> list, Node tmp, ArrayList<Node> visited, ArrayList<Node> stack, boolean hasCycle)
+    {
+		visited.add(tmp);
+		stack.add(tmp);
 		
+		for(int i = 0; i < tmp.edgesTo.size(); i++)
+		{
+			Node a = (Node) tmp.edgesTo.get(i);
+			if(!visited.contains(a)) 
+			{
+				hasCycle = hasCycle || isCyclicUtil(list, a, visited, stack, hasCycle);
+			}
+			else if(stack.contains(a))
+			{
+				hasCycle = true;
+				return hasCycle;
+			}
+		}
+		stack.remove(tmp);
+		return hasCycle;
+    }
+ 
+    public static Boolean isCyclic(ArrayList<Node> DAG)
+    {
+				
+				for(int i = 0; i < DAG.size(); i++)
+				{
+					ArrayList<Node> visited = new ArrayList<Node>();
+					ArrayList<Node> stack = new ArrayList<Node>();
+					Node src = DAG.get(i);
+					boolean hasCycle = false;
+					hasCycle = isCyclicUtil(DAG, src, visited, stack, hasCycle);
+					if(hasCycle)
+					{
+						return true;
+					}
+				}
+		        return false;
+		    }
 	}
 
-}
+
